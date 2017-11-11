@@ -1,0 +1,58 @@
+{
+  "author": {
+    "name": "MDBootstrap"
+  },
+  "bugs": {
+    "url": "https://github.com/mdbootstrap/Angular-Bootstrap-with-Material-Design/issues"
+  },
+  "deprecated": false,
+  "description":
+    "Material Design for Bootstrap (MDB) is a powerful Material Design UI KIT for most popular HTML, CSS, and JS framework - Bootstrap.",
+  "dist": {
+    "shasum": "0c9741b94ee5cd549f77d21bb30c000348b8cb01",
+    "tarball": "https://registry.npmjs.org/angular-bootstrap-md/-/angular-bootstrap-md-4.3.7.tgz"
+  },
+  "homepage": "https://mdbootstrap.com",
+  "keywords": [
+    "material",
+    "design",
+    "bootstrap",
+    "mdbootstrap",
+    "mdb",
+    "framework",
+    "css",
+    "mobile-first",
+    "responsive",
+    "angular",
+    "ng",
+    "ng2",
+    "angular2",
+    "ng4",
+    "angular4"
+  ],
+  "license": "MIT license",
+  "maintainers": [
+    {
+      "name": "mdbootstrap",
+      "email": "support@mdbootstrap.com"
+    }
+  ],
+  "main": "./bundles/angular-bootstrap-md.umd.js",
+  "module": "./angular-bootstrap-md.es5.js",
+  "es2015": "./angular-bootstrap-md.js",
+  "typings": "./angular-bootstrap-md.d.ts",
+  "name": "angular-bootstrap-md",
+  "optionalDependencies": {},
+  "peerDependencies": {
+    "@angular/core": "^4.0.0",
+    "@angular/forms": "^4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mdbootstrap/Angular-Bootstrap-with-Material-Design.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "4.3.7"
+}
