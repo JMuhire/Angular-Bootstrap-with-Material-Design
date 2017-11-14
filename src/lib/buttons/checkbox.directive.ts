@@ -15,14 +15,14 @@ export const CHECKBOX_CONTROL_VALUE_ACCESSOR: any = {
 @Directive({selector: '[mdbCheckbox]', providers: [CHECKBOX_CONTROL_VALUE_ACCESSOR]})
 export class ButtonCheckboxDirective implements ControlValueAccessor, OnInit {
   /** Truthy value, will be set to ngModel */
-  @Input() public btnCheckboxTrue: any = true;
+  @Input() public btnCheckboxTrue = true;
   /** Falsy value, will be set to ngModel */
-  @Input() public btnCheckboxFalse: any = false;
+  @Input() public btnCheckboxFalse = false;
 
   @HostBinding('class.active') public state = false;
 
-  protected value: any;
-  protected isDisabled: boolean;
+  value: any;
+  isDisabled: boolean;
 
   protected onChange: Function;
   protected onTouched: Function;

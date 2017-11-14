@@ -14,5 +14,6 @@
     "flatModuleOutFile": "angular-bootstrap-md.js",
     "flatModuleId": "angular-bootstrap-md",
     "genDir": "../../out-tsc/lib-gen-dir/"
-  }
+  },
+  "exclude": ["test.ts", "**/*.spec.ts", "**/*.e2e-spec.ts", "node_modules", "tmp"]
 }
