@@ -31,8 +31,8 @@ async function build() {
 
     // Compile to ES2015 and ES5.
     let exitCode = await Promise.all([
-      ngc([ '--project', `${tempLibFolder}/tsconfig.lib.json`]), 
-      ngc([ '--project', `${tempLibFolder}/tsconfig.es5.json` ])
+      ngc(['--project', `${tempLibFolder}/tsconfig.lib.json`]),
+      ngc(['--project', `${tempLibFolder}/tsconfig.es5.json`])
     ]);
 
     const [exitCodeES2015, exitCodeES5] = exitCode;
@@ -44,7 +44,7 @@ async function build() {
 
     // Copy typings and metadata to `dist/` folder.
     await Promise.all([
-      _relativeCopy('**/*.d.ts', es2015OutputFolder, distFolder), 
+      _relativeCopy('**/*.d.ts', es2015OutputFolder, distFolder),
       _relativeCopy('**/*.metadata.json', es2015OutputFolder, distFolder)
     ]);
     console.log('Typings and metadata copy succeeded.');
@@ -64,7 +64,7 @@ async function build() {
           include: ['node_modules/rxjs/**']
         }),
         sourcemaps(),
-        nodeResolve({ jsnext: true, module: true })
+        nodeResolve({jsnext: true, module: true})
       ]
     };
 
@@ -80,12 +80,12 @@ async function build() {
         // See https://github.com/rollup/rollup/wiki/JavaScript-API#globals for more.
         '@angular/core': 'ng.core',
         '@angular/forms': 'ng.forms'
-      },
+      }
     };
 
     // UMD bundle.
     const umdInputConfig = Object.assign({}, rollupBaseInputOptions, {
-      input: es5Entry,      
+      input: es5Entry
     });
     const umdOutputConfig = Object.assign({}, rollupBaseOutputOptions, {
       file: path.join(distFolder, `bundles`, `${libName}.umd.js`),
@@ -94,10 +94,10 @@ async function build() {
 
     // Minified UMD bundle.
     const minifiedUmdInputConfig = Object.assign({}, rollupBaseInputOptions, {
-      input: es5Entry,      
+      input: es5Entry,
       plugins: rollupBaseInputOptions.plugins.concat([uglify({})])
     });
-    const minifiedUmdOutputConfig = Object.assign({}, rollupBaseOutputOptions, {      
+    const minifiedUmdOutputConfig = Object.assign({}, rollupBaseOutputOptions, {
       file: path.join(distFolder, `bundles`, `${libName}.umd.min.js`),
       format: 'umd'
     });
@@ -123,20 +123,21 @@ async function build() {
     const allInputConfigs = [umdInputConfig, minifiedUmdInputConfig, fesm5InputConfig, fesm2015InputConfig];
     const allOutputConfigs = [umdOutputConfig, minifiedUmdOutputConfig, fesm5OutputConfig, fesm2015OutputConfig];
 
-    await Promise.all(allInputConfigs.map((cfg, i) => rollup.rollup(cfg).then(bundle => bundle.write(allOutputConfigs[i]))));
+    await Promise.all(
+      allInputConfigs.map((cfg, i) => rollup.rollup(cfg).then(bundle => bundle.write(allOutputConfigs[i])))
+    );
 
     console.log('All bundles generated successfully.');
 
     // Copy package files
     await Promise.all([
       _relativeCopy('license.pdf', rootFolder, distFolder),
-      _directCopy('src/lib/package.json', rootFolder, distFolder),
-      _relativeCopy('assets/**/*', rootFolder, distFolder),
+      _packageJsonCopy('src/lib/package.json', rootFolder, distFolder),
+      _assetsCopy('src/assets/**/*', rootFolder, distFolder),
       _relativeCopy('README.md', rootFolder, distFolder)
     ]);
     console.log('Package files copy succeeded.');
-
-  } catch(e) {
+  } catch (e) {
     console.error('\nBuild failed. See below for errors.\n');
     console.error(e);
     process.exit(1);
@@ -145,10 +146,10 @@ async function build() {
 
 build();
 
-// Copy files not maintaining relative paths.
-function _directCopy(fileGlob, from, to) {
+// Copy package.json.
+function _packageJsonCopy(fileGlob, from, to) {
   return new Promise((resolve, reject) => {
-    glob(fileGlob, { cwd: from, nodir: true }, (err, files) => {
+    glob(fileGlob, {cwd: from, nodir: true}, (err, files) => {
       if (err) reject(err);
       files.forEach(file => {
         const fileName = file.split('/')[file.split('/').length - 1];
@@ -157,16 +158,34 @@ function _directCopy(fileGlob, from, to) {
         const data = fs.readFileSync(origin, 'utf-8');
         fs.writeFileSync(dest, data);
         resolve();
-      })
-    })
+      });
+    });
   });
 }
 
+// Copy assets folder
+function _assetsCopy(fileGlob, from, to) {
+  return new Promise((resolve, reject) => {
+    glob(fileGlob, {cwd: from, nodir: true}, (err, files) => {
+      if (err) reject(err);
+      files.forEach(file => {
+        const origin = path.join(from, file);
+        const writeFile = file.split('/');
+        writeFile.shift();
+        const dest = path.join(to, writeFile.join('/'));
+        const data = fs.readFileSync(origin, 'utf-8');
+        _recursiveMkDir(path.dirname(dest));
+        fs.writeFileSync(dest, data);
+        resolve();
+      });
+    });
+  });
+}
 
 // Copy files maintaining relative paths.
 function _relativeCopy(fileGlob, from, to) {
   return new Promise((resolve, reject) => {
-    glob(fileGlob, { cwd: from, nodir: true }, (err, files) => {
+    glob(fileGlob, {cwd: from, nodir: true}, (err, files) => {
       if (err) reject(err);
       files.forEach(file => {
         const origin = path.join(from, file);
@@ -175,8 +194,8 @@ function _relativeCopy(fileGlob, from, to) {
         _recursiveMkDir(path.dirname(dest));
         fs.writeFileSync(dest, data);
         resolve();
-      })
-    })
+      });
+    });
   });
 }
 
