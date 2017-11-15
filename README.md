@@ -12,6 +12,11 @@
 
 2/ Add 1 by 1, modules from master branch to src/lib folder like buttons module. After copying, resolve all missing import.
 
+### Important:  
+
+If your module import from npm package, you will have to add it to /build.js at globals and external config 
+(see comment for more detail).
+
 Restructure module with public_api.ts and index.ts. For example:
 
 public_api.ts
