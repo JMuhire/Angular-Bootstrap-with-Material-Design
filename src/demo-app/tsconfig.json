@@ -1,0 +1,19 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "declaration": false,
+    "target": "es5",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "lib": ["es2015", "dom"],
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "angular-bootstrap-md/*": ["../../dist/*"]
+    }
+  },
+  "files": ["./main.ts"],
+  "exclude": ["./main-aot.ts"]
+}

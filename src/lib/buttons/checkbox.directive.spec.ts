@@ -1,8 +1,9 @@
-import {By} from '@angular/platform-browser';
 import {Component, DebugElement} from '@angular/core';
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {ButtonCheckboxDirective} from './checkbox.directive';
 import {ViewChild} from '@angular/core';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {By} from '@angular/platform-browser';
+
+import {ButtonCheckboxDirective} from './checkbox.directive';
 
 describe('MDBCheckboxDirective', () => {
   let fixture: ComponentFixture<any>;
