@@ -40,7 +40,7 @@
   "main": "./bundles/angular-bootstrap-md.umd.js",
   "module": "./angular-bootstrap-md.es5.js",
   "es2015": "./angular-bootstrap-md.js",
-  "typings": "./angular-bootstrap-md.d.ts",
+  "typings": "./index.d.ts",
   "name": "angular-bootstrap-md",
   "optionalDependencies": {},
   "peerDependencies": {

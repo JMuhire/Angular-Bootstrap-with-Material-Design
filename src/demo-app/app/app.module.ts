@@ -1,4 +1,5 @@
-import {ButtonsModule} from '../../../dist';
+import {ButtonsModule} from 'angular-bootstrap-md';
+
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
